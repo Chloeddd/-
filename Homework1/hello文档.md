@@ -26,13 +26,16 @@ CODESEG ENDS
 	END MAIN
 ```
 ### 2.汇编及链接
-1. 打开DOSBox.exe，输入masm hello.asm，并设置生成的相关文件名
+1. 汇编：打开DOSBox.exe，输入masm hello.asm，并设置生成的相关文件名
 ![alt text](image.png)
 
-2. 输入hello，即可运行hello.exe
+2. 链接：输入link hello.asm，生成exe可执行文件
+![alt text](image-6.png)
+
+3. 运行：输入hello，即可运行hello.exe
 ![alt text](image-1.png)
 
-3. 输入debug hello.exe，输入-u，可查看反汇编详情
+4. 反汇编：输入debug hello.exe，输入-u，可查看反汇编详情
 ![alt text](image-2.png)
 
 ## 另类执行方式

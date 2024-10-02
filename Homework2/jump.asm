@@ -1,0 +1,43 @@
+DATASEG SEGMENT
+	MSG DB "a"
+	LINE DB 13, 10, '$'
+DATASEG ENDS
+
+CODESEG SEGMENT
+	ASSUME CS:CODESEG,DS:DATASEG
+MAIN PROC FAR
+	MOV AX,DATASEG
+	MOV DS,AX
+	
+    MOV BX,0 ;用于打印计数
+
+L:  MOV AL,[MSG]
+	MOV DL,AL
+	MOV AH,2
+	INT 21H
+	INC AL
+	MOV [MSG],AL
+	INC BX
+
+    CMP BX, 26
+    JZ E ;打印完26个字母，跳转到终止程序
+
+    CMP BX, 13
+    JNZ L ;未打印完13个字母，跳回继续打印字母
+
+    CMP BX, 13
+    JZ N ;打印完13个字母，跳转到打印换行符
+
+
+    ;打印换行符
+N:	MOV DX,OFFSET LINE
+	MOV AH, 9
+	INT 21H
+    JMP L ;跳转回打印字母部分
+
+
+E:	MOV AX,4C00H ;正常退出程序
+	INT 21H
+MAIN ENDP
+CODESEG ENDS
+	END MAIN
